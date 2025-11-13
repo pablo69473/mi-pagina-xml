@@ -1,0 +1,19 @@
+root {
+    display: block;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+element {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+subelement {
+    color: rgb(111, 0, 255);
+    font-weight: bold;
+}

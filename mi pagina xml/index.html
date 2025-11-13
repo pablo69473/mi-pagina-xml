@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualizador Dinámico de XML</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #contenedor {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            min-height: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>no se que hice pero es XML</h1>
+    <button onclick="cargarXML(false)">Mostrar XML sin estilo</button>
+    <button onclick="cargarXML(true)">Mostrar XML con estilo</button>
+
+    <div id="contenedor"></div>
+
+    <script>
+        async function cargarXML(conEstilo) {
+            try {
+                const response = await fetch('mi pagina xml (primera vez).xml');
+                const xmlText = await response.text();
+
+                let htmlContent = `<pre>${escapeHtml(xmlText)}</pre>`;
+
+                if (conEstilo) {
+                    // Si queremos estilo, creamos un iframe que cargue el XML con CSS
+                    htmlContent = `
+                        <iframe src="mi pagina xml (primera vez).xml" style="width:100%; height:400px; border:1px solid #ddd;"></iframe>
+                    `;
+                }
+
+                document.getElementById('contenedor').innerHTML = htmlContent;
+
+            } catch (error) {
+                document.getElementById('contenedor').innerHTML = '<p style="color:red;">Error al cargar el XML: ' + error.message + '</p>';
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Carga inicial sin estilo
+        window.onload = () => cargarXML(false);
+    </script>
+</body>
+</html>
